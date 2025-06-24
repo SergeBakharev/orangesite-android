@@ -3,10 +3,9 @@ name: Build & Release APK
 on:
   push:
     branches:
-      - master
-  push:
+      - main
     tags:
-      - '*'
+      - 'v*'
 
 jobs:
   build:
