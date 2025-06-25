@@ -27,11 +27,11 @@ android {
     compileSdkVersion 33
 
     defaultConfig {
-        applicationId "com.manuelmaly.hn"
+        applicationId "com.sergebakharev.orangesite"
         minSdkVersion 14
         targetSdkVersion 33
         versionCode 26
-        versionName "1.9.16"
+        versionName project.hasProperty('versionName') ? project.property('versionName') : "1.9.16"
     }
 
     signingConfigs {
@@ -62,8 +62,7 @@ android {
                 variant.outputs.each { output ->
                     def outputFile = output.outputFileName
                     if (outputFile != null && outputFile.endsWith('.apk')) {
-                        def fileName = outputFile.replace('.apk',
-                                "-v${versionName}-b${versionCode}.apk")
+                        def fileName = "OrangeSite-v${versionName}-b${versionCode}.apk"
                         output.outputFileName = fileName
                     }
                 }
@@ -74,5 +73,5 @@ android {
 
         }
     }
-    namespace 'com.manuelmaly.hn'
+    namespace 'com.sergebakharev.orangesite'
 }

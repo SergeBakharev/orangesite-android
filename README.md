@@ -3,7 +3,7 @@ OrangeSite (Android)
 
 This is a fork of **HN**, an unofficial Hacker News client for Android, built for reliability and usability.
 
-As **HN** appears to be abandoned, this fork lives on in the same spirit as the original.
+As **HN** appears to be abandoned, this fork lives on in the same spirit as the original. The rename to OrangeSite is to facilitate publishing this on the Play store.
 
 Setup
 -----

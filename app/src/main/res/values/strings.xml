@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">HN</string>
+    <string name="app_name">OrangeSite</string>
     <string name="comments">Comments</string>
     <string name="article">Article</string>
     <string name="share_article_url">Share Article URL</string>
@@ -11,7 +11,7 @@
     <string name="please_log_in">Please log in first via \'Settings\' -> \'User\'.</string>
     <string name="already_upvoted">Upvoted by you</string>
     <string name="already_voted_on">Already voted on</string>
-    <string name="credentials">Enter your HN credentials:</string>
+    <string name="credentials">Enter your Hacker News credentials:</string>
     <string name="check_and_save">Save</string>
     <string name="checking">Checking&#8230;</string>
     <string name="cancel">Cancel</string>
@@ -24,7 +24,7 @@
     <string name="settings">Settings</string>
     <string name="no_topic">No Topic Defined</string>
     <string name="no_url">No URL Defined</string>
-    <string name="about_by">by Creative Pragmatics</string>
+    <string name="about_by">Orinal App (HN) by Creative Pragmatics (Manuel Maly)</string>
     <string name="settings_user">User</string>
     <string name="settings_username">Username</string>
     <string name="settings_password">Password</string>
@@ -48,7 +48,7 @@
     <string name="error_unable_to_retrieve_comments">We were unable to retrieve the latest comments for this post.</string>
     <string name="error_unable_to_retrieve_feed">We were unable to update the posts feed</string>
     <string name="error_unable_to_load_more">We were unable to load more articles</string>
-    <string name="logout_question_lbl">Are you sure you want to logout from HN?</string>
+    <string name="logout_question_lbl">Are you sure you want to logout from Hacker News?</string>
     <string name="ok">Ok</string>
     <string name="crashlytics_pref">Share Anonymous Reports</string>
     <string name="crashlytics_off">No anonymous usage statistics and reports are shared</string>

@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for tags
 
       - name: Set up JDK 11
         uses: actions/setup-java@v4
@@ -20,15 +22,29 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
+      - name: Determine version name
+        id: version_name
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            # For tagged releases, use the tag name (remove 'v' prefix if present)
+            TAG_NAME=${GITHUB_REF#refs/tags/}
+            VERSION_NAME=${TAG_NAME#v}
+          else
+            # For dev builds, use current date in YY.MM.DD format
+            VERSION_NAME=$(date +%y.%m.%d)
+          fi
+          echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
+          echo "Using version name: $VERSION_NAME"
+
       - name: Grant execute permission for gradlew
         run: chmod +x ./app/gradlew || chmod +x ./gradlew
 
       - name: Build Release APK
         run: |
           if [ -f ./gradlew ]; then
-            ./gradlew assembleRelease
+            ./gradlew assembleRelease -PversionName=${{ steps.version_name.outputs.version_name }}
           else
-            cd app && ./gradlew assembleRelease
+            cd app && ./gradlew assembleRelease -PversionName=${{ steps.version_name.outputs.version_name }}
           fi
 
       - name: Find APK path
@@ -46,7 +62,7 @@ jobs:
             PRERELEASE=false
           else
             TAG_NAME=dev
-            RELEASE_NAME="Development Build"
+            RELEASE_NAME="Development Build (${{ steps.version_name.outputs.version_name }})"
             PRERELEASE=true
           fi
           echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
