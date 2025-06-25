@@ -40,18 +40,24 @@ jobs:
       - name: Set release variables
         id: vars
         run: |
-          if [[ $GITHUB_REF == refs/tags/* ]]; then
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
             TAG_NAME=${GITHUB_REF#refs/tags/}
-            RELEASE_NAME=$TAG_NAME
+            RELEASE_NAME="$TAG_NAME"
             PRERELEASE=false
           else
             TAG_NAME=dev
-            RELEASE_NAME=Development Build
+            RELEASE_NAME="Development Build"
             PRERELEASE=true
           fi
           echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
           echo "release_name=$RELEASE_NAME" >> $GITHUB_OUTPUT
           echo "prerelease=$PRERELEASE" >> $GITHUB_OUTPUT
+
+      - name: Force move 'dev' tag to latest commit on develop
+        if: github.ref == 'refs/heads/master'
+        run: |
+          git tag -f dev
+          git push origin dev --force
 
       - name: Create or Update Release
         uses: softprops/action-gh-release@v2
