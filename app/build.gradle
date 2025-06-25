@@ -36,20 +36,26 @@ android {
 
     signingConfigs {
         def props = new Properties()
-        props.load(new FileInputStream(rootProject.file("release.properties")))
-
-        release {
-            storeFile new File(props.keyStore.toString())
-            storePassword props.keyStorePassword
-            keyAlias props.keyAlias
-            keyPassword props.keyAliasPassword
+        def releasePropsFile = rootProject.file("release.properties")
+        
+        if (releasePropsFile.exists()) {
+            props.load(new FileInputStream(releasePropsFile))
+            
+            release {
+                storeFile new File(props.keyStore.toString())
+                storePassword props.keyStorePassword
+                keyAlias props.keyAlias
+                keyPassword props.keyAliasPassword
+            }
         }
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            signingConfig signingConfigs.release
+            if (signingConfigs.hasProperty('release')) {
+                signingConfig signingConfigs.release
+            }
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
 
             applicationVariants.all { variant ->
