@@ -66,7 +66,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 @EActivity(R.layout.comments_activity)
-public class CommentsActivity extends AppCompatActivity implements
+public class CommentsActivity extends BaseListActivity implements
         ITaskFinishedHandler<HNPostComments> {
 
     public static final String EXTRA_HNPOST = "HNPOST";
