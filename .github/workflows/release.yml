@@ -75,13 +75,15 @@ jobs:
           git tag -f dev
           git push origin dev --force
     
-      - name: Delete old release assets (dev builds only)
-        if: startsWith(github.ref, 'refs/heads/develop')
-        uses: mknejp/delete-release-assets@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: dev
-          assets: '*'
+      - name: Delete old dev release (dev builds only)  
+        if: startsWith(github.ref, 'refs/heads/master')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if dev release exists and delete it
+          if gh release view dev --repo ${{ github.repository }} 2>/dev/null; then
+            gh release delete dev --repo ${{ github.repository }} --yes
+          fi
 
       - name: Create or Update Release
         uses: softprops/action-gh-release@v2
